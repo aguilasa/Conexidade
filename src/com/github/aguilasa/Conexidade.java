@@ -45,6 +45,18 @@ public class Conexidade {
 	}
 
 	public void exec() {
+		dfs();
+		System.out.println(complete);
+		sort();
+		dfs();
+		System.out.println(complete);
+	}
+
+	private void sort() {
+		complete.sort((Node n1, Node n2) -> n2.getClose() - n1.getClose());
+	}
+
+	private void dfs() {
 		for (Node u : complete) {
 			u.setColor(Color.WHITE);
 		}
@@ -54,7 +66,6 @@ public class Conexidade {
 				visit(u);
 			}
 		}
-		System.out.println(complete);
 	}
 
 	private void visit(Node u) {
