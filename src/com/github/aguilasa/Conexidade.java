@@ -3,8 +3,7 @@ package com.github.aguilasa;
 public class Conexidade {
 
 	private NodeList complete = new NodeList();
-	private NodeList list = new NodeList();
-	private Node v;
+	private int time = 0;
 
 	public static void main(String[] args) {
 		Conexidade rf = new Conexidade();
@@ -36,20 +35,40 @@ public class Conexidade {
 		complete.add(a);
 
 		a.addAdj(g);
-		b.addAdj(e).addAdj(f).addAdj(g).addAdj(h);
-		c.addAdj(d).addAdj(e).addAdj(g).addAdj(i);
-		d.addAdj(a).addAdj(b).addAdj(c).addAdj(i);
-		e.addAdj(a).addAdj(c).addAdj(f).addAdj(h);
-		f.addAdj(a).addAdj(b).addAdj(e).addAdj(h);
-		g.addAdj(c).addAdj(h).addAdj(i);
-		h.addAdj(e).addAdj(f).addAdj(g);
-		i.addAdj(b).addAdj(c).addAdj(d).addAdj(g);
-
-		v = a;
-		list.add(v);
+		b.addAdj(h).addAdj(g).addAdj(f).addAdj(e);
+		c.addAdj(a);
+		d.addAdj(f).addAdj(e).addAdj(c);
+		g.addAdj(c);
+		h.addAdj(i).addAdj(f);
+		i.addAdj(j).addAdj(b);
+		j.addAdj(i);
 	}
 
 	public void exec() {
+		for (Node u : complete) {
+			u.setColor(Color.WHITE);
+		}
+		time = 0;
+		for (Node u : complete) {
+			if (u.getColor() == Color.WHITE) {
+				visit(u);
+			}
+		}
+		System.out.println(complete);
+	}
+
+	private void visit(Node u) {
+		u.setColor(Color.GRAY);
+		time++;
+		u.setOpen(time);
+		for (Node v : u.getAdjacency()) {
+			if (v.getColor() == Color.WHITE) {
+				visit(v);
+			}
+		}
+		u.setColor(Color.BLACK);
+		time++;
+		u.setClose(time);
 	}
 
 }

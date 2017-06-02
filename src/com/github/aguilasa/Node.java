@@ -70,7 +70,7 @@ public class Node {
 
 	@Override
 	public String toString() {
-		return name;
+		return String.format("%s(%d/%d)", name, open, close);
 	}
 
 	@Override
